@@ -1,0 +1,135 @@
+include_directories(
+                    ./jbig2dec
+                    ./openjpeg/libopenjpeg
+                    ./jpeg
+                    ./mujs
+                    ./zlib
+                    ./freetype/include
+                    ../scripts/freetype
+                    ../scripts/jpeg
+                    ../scripts/openjpeg
+                    )
+
+set(MY_ROOT src/main/cpp)
+MESSAGE(STATUS "messgae=${MY_ROOT}")
+set(FILE_LIST
+	mujs/one.c
+	jbig2dec/jbig2.c
+	jbig2dec/jbig2_arith.c
+	jbig2dec/jbig2_arith_iaid.c
+	jbig2dec/jbig2_arith_int.c
+	jbig2dec/jbig2_generic.c
+	jbig2dec/jbig2_halftone.c
+	jbig2dec/jbig2_huffman.c
+	jbig2dec/jbig2_image.c
+	jbig2dec/jbig2_metadata.c
+	jbig2dec/jbig2_mmr.c
+	jbig2dec/jbig2_page.c
+	jbig2dec/jbig2_refinement.c
+	jbig2dec/jbig2_segment.c
+	jbig2dec/jbig2_symbol_dict.c
+	jbig2dec/jbig2_text.c
+	openjpeg/libopenjpeg/bio.c
+	openjpeg/libopenjpeg/cidx_manager.c
+	openjpeg/libopenjpeg/cio.c
+	openjpeg/libopenjpeg/dwt.c
+	openjpeg/libopenjpeg/event.c
+	openjpeg/libopenjpeg/function_list.c
+	openjpeg/libopenjpeg/image.c
+	openjpeg/libopenjpeg/invert.c
+	openjpeg/libopenjpeg/j2k.c
+	openjpeg/libopenjpeg/jp2.c
+	openjpeg/libopenjpeg/mct.c
+	openjpeg/libopenjpeg/mqc.c
+	openjpeg/libopenjpeg/openjpeg.c
+	openjpeg/libopenjpeg/opj_clock.c
+	openjpeg/libopenjpeg/phix_manager.c
+	openjpeg/libopenjpeg/pi.c
+	openjpeg/libopenjpeg/ppix_manager.c
+	openjpeg/libopenjpeg/raw.c
+	openjpeg/libopenjpeg/t1.c
+	openjpeg/libopenjpeg/t1_generate_luts.c
+	openjpeg/libopenjpeg/t2.c
+	openjpeg/libopenjpeg/tcd.c
+	openjpeg/libopenjpeg/tgt.c
+	openjpeg/libopenjpeg/thix_manager.c
+	openjpeg/libopenjpeg/tpix_manager.c
+	jpeg/jaricom.c
+	jpeg/jcomapi.c
+	jpeg/jdapimin.c
+	jpeg/jdapistd.c
+	jpeg/jdarith.c
+	jpeg/jdatadst.c
+	jpeg/jdatasrc.c
+	jpeg/jdcoefct.c
+	jpeg/jdcolor.c
+	jpeg/jddctmgr.c
+	jpeg/jdhuff.c
+	jpeg/jdinput.c
+	jpeg/jdmainct.c
+	jpeg/jdmarker.c
+	jpeg/jdmaster.c
+	jpeg/jdmerge.c
+	jpeg/jdpostct.c
+	jpeg/jdsample.c
+	jpeg/jdtrans.c
+	jpeg/jerror.c
+	jpeg/jfdctflt.c
+	jpeg/jfdctfst.c
+	jpeg/jfdctint.c
+	jpeg/jidctflt.c
+	jpeg/jidctfst.c
+	jpeg/jidctint.c
+	jpeg/jmemmgr.c
+	jpeg/jquant1.c
+	jpeg/jquant2.c
+	jpeg/jutils.c
+	zlib/adler32.c
+	zlib/compress.c
+	zlib/crc32.c
+	zlib/deflate.c
+	zlib/inffast.c
+	zlib/inflate.c
+	zlib/inftrees.c
+	zlib/trees.c
+	zlib/uncompr.c
+	zlib/zutil.c
+	freetype/src/base/ftbase.c
+	freetype/src/base/ftbbox.c
+	freetype/src/base/ftbitmap.c
+	freetype/src/base/ftfntfmt.c
+	freetype/src/base/ftgasp.c
+	freetype/src/base/ftglyph.c
+	freetype/src/base/ftinit.c
+	freetype/src/base/ftstroke.c
+	freetype/src/base/ftsynth.c
+	freetype/src/base/ftsystem.c
+	freetype/src/base/fttype1.c
+	freetype/src/cff/cff.c
+	freetype/src/cid/type1cid.c
+	freetype/src/psaux/psaux.c
+	freetype/src/pshinter/pshinter.c
+	freetype/src/psnames/psnames.c
+	freetype/src/raster/raster.c
+	freetype/src/smooth/smooth.c
+	freetype/src/sfnt/sfnt.c
+	freetype/src/truetype/truetype.c
+	freetype/src/type1/type1.c)
+
+add_definitions(-DFT2_BUILD_LIBRARY)
+add_definitions(-DDARWIN_NO_CARBON)
+add_definitions(-DHAVE_STDINT_H)
+add_definitions(-DOPJ_HAVE_STDINT_H)
+add_definitions(-DFT_CONFIG_MODULES_H="slimftmodules.h")
+add_definitions(-DFT_CONFIG_OPTIONS_H="slimftoptions.h")
+
+add_library( # Sets the name of the library.
+             mupdfthirdparty
+
+             # Sets the library as a shared library.
+             STATIC
+
+             # Provides a relative path to your source file(s).
+             # Associated headers in the same location as their source
+             # file are automatically included.
+             ${FILE_LIST})
